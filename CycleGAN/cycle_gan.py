@@ -57,6 +57,7 @@ class cycleGAN(nn.Module):
 
         #
         self.save_dir = opt.save_dir
+        os.makedirs(self.save_dir, exist_ok=True)
         self.device = opt.device
         
         step_size = 100
@@ -236,28 +237,28 @@ class cycleGAN(nn.Module):
             self.forward()
 
     def show_latest_img(self):
-#         fig, axes = plt.subplots(ncols=3, nrows=2, figsize=(14,12))
-#         torchimshow(self.real_A[0],ax=axes[0][0])
-#         axes[0][0].set_title('real image  A')
-#         torchimshow(self.fake_B[0],ax=axes[0][1])
-#         axes[0][1].set_title('style transfered to B')
-#         torchimshow(self.rec_A[0],ax=axes[0][2])
-#         axes[0][2].set_title('recovered image A')
-#         torchimshow(self.real_B[0],ax=axes[1][0])
-#         axes[1][0].set_title('real image B')
-#         torchimshow(self.fake_A[0],ax=axes[1][1])
-#         axes[1][1].set_title('style transfered to A')
-#         torchimshow(self.rec_B[0],ax=axes[1][2])
-#         axes[1][2].set_title('recovered image B')
-        fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(7,6))
-        torchimshow(self.fake_B[0],ax=axes[0][0])
-        axes[0][0].set_title('style transfered to B')
-        torchimshow(self.rec_A[0],ax=axes[0][1])
-        axes[0][1].set_title('recovered image A')
-        torchimshow(self.fake_A[0],ax=axes[1][0])
-        axes[1][0].set_title('style transfered to A')
-        torchimshow(self.rec_B[0],ax=axes[1][1])
-        axes[1][1].set_title('recovered image B')
+        fig, axes = plt.subplots(ncols=3, nrows=2, figsize=(7,6))
+        torchimshow(self.real_A[0],ax=axes[0][0])
+        axes[0][0].set_title('real image  A')
+        torchimshow(self.fake_B[0],ax=axes[0][1])
+        axes[0][1].set_title('style transfered to B')
+        torchimshow(self.rec_A[0],ax=axes[0][2])
+        axes[0][2].set_title('recovered image A')
+        torchimshow(self.real_B[0],ax=axes[1][0])
+        axes[1][0].set_title('real image B')
+        torchimshow(self.fake_A[0],ax=axes[1][1])
+        axes[1][1].set_title('style transfered to A')
+        torchimshow(self.rec_B[0],ax=axes[1][2])
+        axes[1][2].set_title('recovered image B')
+#         fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(7,6))
+#         torchimshow(self.fake_B[0],ax=axes[0][0])
+#         axes[0][0].set_title('style transfered to B')
+#         torchimshow(self.rec_A[0],ax=axes[0][1])
+#         axes[0][1].set_title('recovered image A')
+#         torchimshow(self.fake_A[0],ax=axes[1][0])
+#         axes[1][0].set_title('style transfered to A')
+#         torchimshow(self.rec_B[0],ax=axes[1][1])
+#         axes[1][1].set_title('recovered image B')
         
     def return_loss(self):
         return [self.loss_D_A,self.loss_G_A,
@@ -265,19 +266,24 @@ class cycleGAN(nn.Module):
                 self.loss_D_B,self.loss_G_B,
                 self.loss_cycle_B,self.loss_idt_B]
     
-    def save_loss(self, Loss, epoch):
-        save_filename = '%s_net_Loss.pth' % (epoch)
+    def save_checkpoint(self, checkpoint, epoch):
+        save_filename = '%s_net_checkpoint.pth' % (epoch)
         save_path = os.path.join(self.save_dir, save_filename)
-        torch.save(Loss, save_path)
+        torch.save(checkpoint, save_path)
         
-    def load_loss(self, epoch):
-        load_filename = '%s_net_Loss.pth' % (epoch)
+    def load_checkpoint(self, epoch):
+        load_filename = '%s_net_checkpoint.pth' % (epoch)
         load_path = os.path.join(self.save_dir, load_filename)
         if os.path.isfile(load_path):
-            Loss = torch.load(load_path)
-            return Loss
+            checkpoint = torch.load(load_path)
         else:
-            return []
+            print(f'{load_filename} do not exist')
+            print('start new training')
+            checkpoint = {}
+            checkpoint['Loss'] = []
+            checkpoint['current epoch'] = 0
+        return checkpoint
+            
         
             
         
