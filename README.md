@@ -33,9 +33,6 @@ ECE 285 MLIP final project
 
 
 ## Authors: 
-- Wansen Zhang
-- Tongji Luo
-- Youbin Mo 
-- Yu Shi
+Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
 
 ## Acknowledgments
