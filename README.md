@@ -23,9 +23,11 @@ ECE 285 MLIP final project
 - ```dataloader.py```: The module for creating dataset and dataloader as well as image visualization.
 
 ## Dataset
+### [Part 1]
 ### CycleGAN/dataset
 
 ## How To Start(Demo)
+### [Part 1]
 ### Cycle-GAN
 Before running ```demo.ipynb```, check the following: 
 - The running environment meets the requirements.
@@ -36,8 +38,12 @@ Before running ```demo.ipynb```, check the following:
 
 Simply run the notebook and you will get the results as shown.
 ## Results
-### 
+### [Part I]
+#### [images]
+#### [losses]
 ### Cycle-GAN
+#### [iamges]
+#### [loss]
 
 
 ## Authors: 
