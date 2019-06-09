@@ -128,16 +128,8 @@ class Discriminator(nn.Module):
 
 # lr scheduler
 def get_scheduler(optimizer, step_size):
-    """Return a learning rate scheduler
-    Parameters:
-        optimizer          -- the optimizer of the network
-        opt (option class) -- stores all the experiment flags; needs to be a subclass of BaseOptions．　
-                              opt.lr_policy is the name of learning rate policy: linear | step | plateau | cosine
-    For 'linear', we keep the same learning rate for the first <opt.niter> epochs
-    and linearly decay the rate to zero over the next <opt.niter_decay> epochs.
-    For other schedulers (step, plateau, and cosine), we use the default PyTorch schedulers.
-    See https://pytorch.org/docs/stable/optim.html for more details.
-    """
-
+    '''
+    return a learning rate scheduler
+    '''
     scheduler = lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.1)
     return scheduler
