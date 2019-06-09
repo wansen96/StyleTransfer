@@ -12,7 +12,7 @@ ECE 285 MLIP final project
 ## Code Organization
 ### [Part 1]
 ### CycleGAN/
-- ```demo.ipynb```: Run a demo for our code. Display the results of Cycle-GAN
+- ```demo_CycleGAN.ipynb```: Run a demo for our code. Display the results of Cycle-GAN
 - ```training.ipynb```: Run the training of Cycle-GAN model in notebook.
 - ```show_results.ipynb```: Run the code to display the training results.(Almost same as demo)
 - ```train.py```: The code for training as ```.py``` file. 
@@ -29,7 +29,7 @@ ECE 285 MLIP final project
 ## How To Start(Demo)
 ### [Part 1]
 ### Cycle-GAN
-Before running ```demo.ipynb```, check the following: 
+Before running ```demo_CycleGAN.ipynb```, check the following: 
 - The running environment meets the requirements.
 - All python files shown in Code Organization should be included in the same directory as ```demo.ipynb```.
 - The folder named after variable ```set_A``` and ```set_B``` in the ```opt.py``` exist in the folder ```dataset```.
