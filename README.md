@@ -1,6 +1,6 @@
 # Style Transfer
 ## Description
-ECE 285 MLIP final project
+ECE [285 MLIP](https://www.charles-deledalle.fr/pages/teaching.php#learningFA18) final project
 
 This is project is developed by team A++ composed of Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
 
