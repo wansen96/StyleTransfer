@@ -6,8 +6,7 @@ This is project is developed by team A++ composed of Wansen Zhang, Tongji Luo, Y
 
 Marvel comic fans are always complaining about how the movie casting ruin their favorite characters while the movie fans argue that the movie characters can fit into the comic universe perfectly. Here we have found a way to tranfer the marvel figures into different styles so that we could end this argument.
 
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_comic.jpg" width="250" height="350" /><img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_real.jpg" width="250" height="350" />
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_tranfer.png" width="250" height="380" />
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_transfer.png" width="200" height="300" />
 
 ## Requirements
 - Python 3.7 or above
