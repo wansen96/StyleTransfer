@@ -2,7 +2,12 @@
 ## Description
 ECE [285 MLIP](https://www.charles-deledalle.fr/pages/teaching.php#learningFA18) final project
 
-This is project is developed by team A++ composed of Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
+This project is developed by team A++ composed of Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
+
+Two style transfer methods are implemented in our project:
+
+- Neural Style Transfer
+- Style Transfer via Cycle-GAN
 
 Marvel comic fans are always complaining about how the movie casting ruin their favorite characters while the movie fans argue that the movie characters can fit into the comic universe perfectly. Here we have found a way to tranfer the marvel figures into different styles so that we could end this argument.
 
@@ -37,7 +42,10 @@ Marvel comic fans are always complaining about how the movie casting ruin their 
 One content image and one style image.
 
 ### CycleGAN/dataset
-
+- Picasso: Pablo Picasso’s artworks from Wikiart
+- Landscape: Landscape from Flickr
+- Ironman Sketch from Google
+- Ironman Comics from Google
 ## How To Start(Demo)
 ### Neural style transfer
 Before running ```demo_NeuralStyleTransfer.ipynb```, check the following: 
