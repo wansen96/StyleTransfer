@@ -61,6 +61,8 @@ Simply run the notebook and you will get the results as shown.
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_transfer.png" width="200" height="300" />
 
 #### [losses]
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/loss_total.png" width="300" height="200" />
+
 ### Cycle-GAN
 #### [images]
 #### [loss]
