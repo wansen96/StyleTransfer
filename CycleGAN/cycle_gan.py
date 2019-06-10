@@ -10,8 +10,31 @@ from dataloader import torchimshow
 from matplotlib import pyplot as plt
 
 class cycleGAN(nn.Module):
-    def __init__(self, opt):
+    class default_option():
+        def __init__(self):
+            self.lr = 0.0002
+            self.b1 = 0.5
+            self.b2 = 0.999
+            self.channels = 3
+            self.out_channels = 3
+            self.n_residual_blocks = 9
+            self.save_dir = "./saved_models/"
+            
+            self.lambda_identity=0.5
+            self.lambda_A=10.
+            self.lambda_B=10.
+            self.image_size = (256,256)
+            self.device = 'cuda'
+
+    def __init__(self, opt=None):
+        '''
+
+        :param opt:
+        :param nic:
+        '''
         super(cycleGAN, self).__init__()
+        if opt == None:
+            opt = self.default_option()
         self.opt = opt
         nic = opt.channels
         noc = opt.out_channels
@@ -20,14 +43,14 @@ class cycleGAN(nn.Module):
         self.loss_names = ['D_A', 'G_A', 'cycle_A', 'idt_A', 'D_B', 'G_B', 'cycle_B', 'idt_B']
         # define Generator
         """
-        ResnetGenerator(in_channels, out_channels, num_residual_blocks)
+        ResnetGenerator(nic, out_channels, num_residual_blocks, ngf)
         """
         self.GenA = networks.ResnetGenerator(nic, noc, opt.n_residual_blocks)
         self.GenB = networks.ResnetGenerator(nic, noc, opt.n_residual_blocks)
 
         # define Discriminator
         """
-        Discriminator(in_channels)
+        Discriminator(nic)
         """
         self.DisA = networks.Discriminator(nic, opt.image_size)
         self.DisB = networks.Discriminator(nic, opt.image_size)
@@ -41,9 +64,9 @@ class cycleGAN(nn.Module):
         self.criterion_GAN = nn.MSELoss()
         self.criterion_Cycle = nn.L1Loss()
         self.criterion_idt = nn.L1Loss()
+        self.optimizers = []
 
         # define optimizer
-        self.optimizers=[]
         self.optimizer_G = torch.optim.Adam(itertools.chain(self.GenA.parameters(), self.GenB.parameters()),
                                             lr=opt.lr, betas=(opt.b1, 0.999))
         self.optimizer_D = torch.optim.Adam(itertools.chain(self.DisA.parameters(), self.DisB.parameters()),
@@ -51,21 +74,14 @@ class cycleGAN(nn.Module):
         self.optimizers.append(self.optimizer_G)
         self.optimizers.append(self.optimizer_D)
 
-        # create saving folder
+        #
         self.save_dir = opt.save_dir
-        os.makedirs(self.save_dir, exist_ok=True)
-        
         self.device = opt.device
         
-        # define learning rate schedulers
         step_size = 100
         self.schedulers = [networks.get_scheduler(optimizer, step_size) for optimizer in self.optimizers]
 
-
     def set_input(self, real_A, real_B):
-        '''
-        Set inputs into model
-        '''
         #self_device here
         self.real_A = real_A
         self.real_B = real_B
@@ -147,9 +163,7 @@ class cycleGAN(nn.Module):
         
     # Optimizer Step
     def optimize_step(self):
-        '''
-        Calculate losses and gradient, backprop, update weights
-        '''
+        """Calculate losses, gradients, and update network weights; called in every training iteration"""
         # forward
         self.forward()  # compute fake images and reconstruction images.
         # G_A and G_B
@@ -164,11 +178,9 @@ class cycleGAN(nn.Module):
         self.backward_D_B()  # calculate graidents for D_B
         self.optimizer_D.step()  # update D_A and D_B's weights
 
+
     # save model
     def save_networks(self, epoch):
-        '''
-        save networks in default folder
-        '''
         for name in self.model_names:
             if isinstance(name, str):
                 save_filename = '%s_net_%s.pth' % (epoch, name)
@@ -176,34 +188,26 @@ class cycleGAN(nn.Module):
                 net = getattr(self, name)
                 torch.save(net.cpu().state_dict(), save_path)
                 net.cuda(0)
+                    
 
     # load model
     def load_networks(self, epoch):
-        '''
-        load networks by selected epoch
-        Use new networks if files do not exist
-        '''
         for name in self.model_names:
             if isinstance(name, str):
                 load_filename = '%s_net_%s.pth' % (epoch, name)
                 load_path = os.path.join(self.save_dir, load_filename)
-                if os.path.isfile(load_path):
-                    net = getattr(self, name)
-                    if isinstance(net, torch.nn.DataParallel):
-                        net = net.module
-                    print('loading the model from %s' % load_path)
-                    # if you are using PyTorch newer than 0.4 (e.g., built from
-                    # GitHub source), you can remove str() on self.device
-                    state_dict = torch.load(load_path, map_location=self.device)
-                    if hasattr(state_dict, '_metadata'):
-                        del state_dict._metadata
+                net = getattr(self, name)
+                if isinstance(net, torch.nn.DataParallel):
+                    net = net.module
+                print('loading the model from %s' % load_path)
+                state_dict = torch.load(load_path, map_location=self.device)
+                if hasattr(state_dict, '_metadata'):
+                    del state_dict._metadata
 
-                    # patch InstanceNorm checkpoints prior to 0.4
-                    for key in list(state_dict.keys()):  # need to copy keys here because we mutate in loop
-                        self.__patch_instance_norm_state_dict(state_dict, net, key.split('.'))
-                    net.load_state_dict(state_dict)
-                else:
-                    print('No such file: %s'%load_path)
+                # patch InstanceNorm checkpoints prior to 0.4
+                for key in list(state_dict.keys()):  # need to copy keys here because we mutate in loop
+                    self.__patch_instance_norm_state_dict(state_dict, net, key.split('.'))
+                net.load_state_dict(state_dict)
 
     def __patch_instance_norm_state_dict(self, state_dict, module, keys, i=0):
         key = keys[i]
@@ -221,15 +225,18 @@ class cycleGAN(nn.Module):
     def update_learning_rate(self):
         '''Update learning rates for all the networks by learning rate scheduler'''
         for scheduler in self.schedulers:
-            scheduler.step()
+                scheduler.step()
 
         lr = self.optimizers[0].param_groups[0]['lr']
         print('learning rate = %.7f' % lr)
-    
+
+    def get_current_losses(self):
+        losses = {}
+        for name in self.loss_names:
+            if isinstance(name, str):
+                losses[name] = float(getattr(self, 'loss_' + name))
+        return losses
     def test(self):
-        """
-        call forward function only
-        """
         with torch.no_grad():
             self.forward()
 
@@ -252,7 +259,8 @@ class cycleGAN(nn.Module):
         axes[1][1].set_title('style transfered to A')
         torchimshow(self.rec_B[0],ax=axes[1][2])
         axes[1][2].set_title('recovered image B')
-        
+        return axes
+            
     def return_loss(self):
         return [self.loss_D_A,self.loss_G_A,
                 self.loss_cycle_A,self.loss_idt_A,
@@ -283,9 +291,6 @@ class cycleGAN(nn.Module):
             checkpoint['Loss'] = []
             checkpoint['current epoch'] = 0
         return checkpoint
-            
-        
-            
-        
+                
 
 
