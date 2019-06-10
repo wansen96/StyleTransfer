@@ -67,15 +67,13 @@ Simply run the notebook and you will get the results as shown.
 ### Cycle-GAN
 #### images
 - Landscape Style Translation
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/land_pic.png">
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/land_pic.png"/>
 - Sketch Auto-Fill Color
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/ironman.png" >
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/ironman.png" />
 #### loss
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/loss.png">
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/loss.png"/>
 
 
 
 ## Authors: 
 Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
-
-## Acknowledgments
