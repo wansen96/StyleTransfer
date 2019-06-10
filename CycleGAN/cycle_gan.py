@@ -230,7 +230,6 @@ class cycleGAN(nn.Module):
         """
         call forward function only
         """
-        self.eval()
         with torch.no_grad():
             self.forward()
 
