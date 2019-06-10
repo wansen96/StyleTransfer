@@ -2,6 +2,10 @@
 ## Description
 ECE 285 MLIP final project
 
+This is project is developed by team A++ composed of Wansen Zhang, Tongji Luo, Youbin Mo, Yu Shi
+
+Marvel comic fans are always complaining about how the movie casting ruin their favorite characters while the movie fans argue that the movie characters can fit into the comic universe perfectly. Here we have found a way to tranfer the marvel figures into different styles so that we could end this argument.
+
 ## Requirements
 - Python 3.7 or above
 - PyTorch 
@@ -21,6 +25,12 @@ ECE 285 MLIP final project
 - ```networks.py```: The code for Generators and Discriminators in GANS.
 - ```opt.py```: The code stores options and parameters.
 - ```dataloader.py```: The module for creating dataset and dataloader as well as image visualization.
+
+### [Part 2]
+### Neural_Style_transfer/
+- ```NeuralStyleTransfer.ipynb```: Run the neural style transfer code to get the results directly.
+- ```NNSF.py```: Organized neural style transfer code as ```.py``` file.
+- ```download_model.sh```: Run this code to download the VGG pre-trained model(already been added into NeuralStyleTransfer.ipynb).
 
 ## Dataset
 ### [Part 1]
