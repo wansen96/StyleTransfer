@@ -45,27 +45,34 @@ Before running ```demo_NeuralStyleTransfer.ipynb```, check the following:
 - Check the GPU resources are available.
 
 ### Cycle-GAN
-Before running ```demo_CycleGAN.ipynb```, check the following: 
+Before running ```demo_CycleGANs.ipynb```, check the following: 
 - The running environment meets the requirements.
-- All python files shown in Code Organization should be included in the same directory as ```demo.ipynb```.
-- The folder named after variable ```set_A``` and ```set_B``` in the ```opt.py``` exist in the folder ```dataset```.
-- The existence of saved model ```MODEL NAME HERE``` in the folder ```saved_models_DATASETA HERE_DATASETB HERE```.
+- All python files shown in Code Organization should be included in the same directory as ```demo_CycleGANs.ipynb```.
+- Make sure ```dataset``` contains following four folders with corresponding images: ```landscape```and ```picasso```, ```ironman``` and ```sketch```.
+- Make sure folders ```saved_models_ironman_sketch``` and ```saved_models_landscape_picasso``` exist with pre-trained models inside.
+- Make sure ```latest_net_checkpoint.pth``` in the folder ```saved_models_ironman_sketch```.
 - Check the GPU resources are available.
 
 Simply run the notebook and you will get the results as shown.
 ## Results
 ### Neural style transfer
-#### [images]
+#### images
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_transfer.png" width="200" height="300" />
 
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_transfer.png" width="200" height="300" />
 
-#### [losses]
+#### losses
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/loss_total.png" width="300" height="200" />
 
 ### Cycle-GAN
-#### [images]
-#### [loss]
+#### images
+- Landscape Style Translation
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/land_pic.png" width="300" height="200" />
+- Sketch Auto-Fill Color
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/ironman.png" width="300" height="200" />
+#### loss
+<img src="https://github.com/wansen96/StyleTransfer/blob/master/CycleGAN/results/loss.png" width="300" height="200" />
+
 
 
 ## Authors: 
