@@ -33,7 +33,9 @@ Marvel comic fans are always complaining about how the movie casting ruin their 
 - ```dataloader.py```: The module for creating dataset and dataloader as well as image visualization.
 
 ## Dataset
-### [Part 1]
+### Neural style transfer
+One content image and one style image.
+
 ### CycleGAN/dataset
 
 ## How To Start(Demo)
@@ -57,8 +59,6 @@ Simply run the notebook and you will get the results as shown.
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/hulk_transfer.png" width="200" height="300" />
 
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/thor_transfer.png" width="200" height="300" />
-
-<img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_comic.jpg" width="200" height="300" />    <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_real.jpg" width="200" height="300" />   <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/ironman_transfer.png" width="200" height="300" />
 
 #### [losses]
 <img src="https://github.com/wansen96/StyleTransfer/blob/master/Sample_results/loss_total.png" width="300" height="200" />
